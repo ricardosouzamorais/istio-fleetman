@@ -1,7 +1,7 @@
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: a-set-of-routing-rules-we-can-call-this-anything  # "just" a name for this virtualservice
+  name: fleetman-staff-service-virtual-service  # "just" a name for this virtualservice
   namespace: default
 spec:
   hosts:
@@ -11,20 +11,26 @@ spec:
         - destination:
             host: fleetman-staff-service.default.svc.cluster.local # The Target DNS name
             subset: safe-group  # The name defined in the DestinationRule
-          weight: 90
+          weight: 75
         - destination:
             host: fleetman-staff-service.default.svc.cluster.local # The Target DNS name
             subset: risky-group  # The name defined in the DestinationRule
-          weight: 10
+          weight: 25
 ---
 kind: DestinationRule       # Defining which pods should be part of each subset
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: grouping-rules-for-our-photograph-canary-release # This can be anything you like.
+  name: fleetman-staff-service-destination-rule # This can be anything you like.
   namespace: default
 spec:
-  host: fleetman-staff-service # Service
-  trafficPolicy: ~
+  host: fleetman-staff-service.default.svc.cluster.local # The Service DNS (ie the regular K8S Service) name that we're applying routing rules to.
+  # Sticky Session/Session Affinity is not supported for Weighted Routing
+  # https://github.com/istio/istio/issues/9764
+  # https://github.com/envoyproxy/envoy/issues/8167
+  # trafficPolicy:
+  #   loadBalancer:
+  #     consistentHash:
+  #       useSourceIp: true
   subsets:
     - labels:   # SELECTOR.
         version: safe # find pods with label "safe"
