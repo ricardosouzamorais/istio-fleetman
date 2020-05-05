@@ -3,71 +3,163 @@ apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
   # port forward 80 on the host to 80 on this node
+  # extraPortMappings:
+  # - containerPort: 30080
+  #   hostPort: 30080
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31000
+  #   hostPort: 31000
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31001
+  #   hostPort: 31001
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31002
+  #   hostPort: 31002
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32248
+  #   hostPort: 32248
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31380
+  #   hostPort: 31380
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30320
+  #   hostPort: 30320
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32058
+  #   hostPort: 32058
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30747
+  #   hostPort: 30747
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31782
+  #   hostPort: 31782
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30178
+  #   hostPort: 30178
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32399
+  #   hostPort: 32399
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30968
+  #   hostPort: 30968
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+- role: worker
   extraPortMappings:
   - containerPort: 30080
     hostPort: 30080
-    # optional: set the bind address on the host
-    # 0.0.0.0 is the current default
     listenAddress: "127.0.0.1"
-    # optional: set the protocol to one of TCP, UDP, SCTP.
-    # TCP is the default
     protocol: TCP
   - containerPort: 31000
     hostPort: 31000
-    # optional: set the bind address on the host
-    # 0.0.0.0 is the current default
     listenAddress: "127.0.0.1"
-    # optional: set the protocol to one of TCP, UDP, SCTP.
-    # TCP is the default
     protocol: TCP
   - containerPort: 31001
     hostPort: 31001
-    # optional: set the bind address on the host
-    # 0.0.0.0 is the current default
     listenAddress: "127.0.0.1"
-    # optional: set the protocol to one of TCP, UDP, SCTP.
-    # TCP is the default
     protocol: TCP
   - containerPort: 31002
     hostPort: 31002
-    # optional: set the bind address on the host
-    # 0.0.0.0 is the current default
     listenAddress: "127.0.0.1"
-    # optional: set the protocol to one of TCP, UDP, SCTP.
-    # TCP is the default
     protocol: TCP
-- role: worker
-  extraPortMappings:
-    - containerPort: 30080
-      hostPort: 32080
-      # optional: set the bind address on the host
-      # 0.0.0.0 is the current default
-      listenAddress: "127.0.0.1"
-      # optional: set the protocol to one of TCP, UDP, SCTP.
-      # TCP is the default
-      protocol: TCP
-    - containerPort: 31000
-      hostPort: 32000
-      # optional: set the bind address on the host
-      # 0.0.0.0 is the current default
-      listenAddress: "127.0.0.1"
-      # optional: set the protocol to one of TCP, UDP, SCTP.
-      # TCP is the default
-      protocol: TCP
-    - containerPort: 31001
-      hostPort: 32001
-      # optional: set the bind address on the host
-      # 0.0.0.0 is the current default
-      listenAddress: "127.0.0.1"
-      # optional: set the protocol to one of TCP, UDP, SCTP.
-      # TCP is the default
-      protocol: TCP
-    - containerPort: 31002
-      hostPort: 32002
-      # optional: set the bind address on the host
-      # 0.0.0.0 is the current default
-      listenAddress: "127.0.0.1"
-      # optional: set the protocol to one of TCP, UDP, SCTP.
-      # TCP is the default
-      protocol: TCP
-
+  - containerPort: 32248
+    hostPort: 32248
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 31380
+    hostPort: 31380
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 30320
+    hostPort: 30320
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 32058
+    hostPort: 32058
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 30747
+    hostPort: 30747
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 31782
+    hostPort: 31782
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 30178
+    hostPort: 30178
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 32399
+    hostPort: 32399
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  - containerPort: 30968
+    hostPort: 30968
+    listenAddress: "127.0.0.1"
+    protocol: TCP
+  # extraPortMappings:
+  # - containerPort: 30080
+  #   hostPort: 35080
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31000
+  #   hostPort: 35000
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31001
+  #   hostPort: 35001
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31002
+  #   hostPort: 35002
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32248
+  #   hostPort: 35248
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31380
+  #   hostPort: 35380
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30320
+  #   hostPort: 35320
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32058
+  #   hostPort: 35058
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30747
+  #   hostPort: 35747
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 31782
+  #   hostPort: 35782
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30178
+  #   hostPort: 35178
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 32399
+  #   hostPort: 35399
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP
+  # - containerPort: 30968
+  #   hostPort: 35968
+  #   listenAddress: "127.0.0.1"
+  #   protocol: TCP

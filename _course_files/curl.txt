@@ -1,0 +1,13 @@
+while true; do \
+  curl -s http://localhost:31380/experimental | grep title; \
+  sleep 0.5; \
+  curl -s http://localhost:31380| grep title; \
+  sleep 0.5; \
+done | tee log
+
+while true; do \
+  curl -s -H "x-my-header: canary" http://localhost:31380 | grep title; \
+  sleep 0.5; \
+  curl -s http://localhost:31380| grep title; \
+  sleep 0.5; \
+done | tee log
