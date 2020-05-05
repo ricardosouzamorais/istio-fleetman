@@ -1,11 +1,11 @@
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-staff-service
+  name: fleetman-staff-service-vs
   namespace: default
 spec:
   hosts:
-    - fleetman-staff-service
+    - fleetman-staff-service.default.svc.cluster.local
   http:
     - match:
         - headers:
@@ -13,20 +13,20 @@ spec:
               exact: canary
       route:
         - destination:
-            host: fleetman-staff-service
+            host: fleetman-staff-service.default.svc.cluster.local
             subset: risky
     - route:
         - destination:
-            host: fleetman-staff-service
+            host: fleetman-staff-service.default.svc.cluster.local
             subset: safe
 ---
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-staff-service
+  name: fleetman-staff-service-dr
   namespace: default
 spec:
-  host: fleetman-staff-service
+  host: fleetman-staff-service.default.svc.cluster.local
   subsets:
     - labels:
         version: safe

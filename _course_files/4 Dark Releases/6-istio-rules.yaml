@@ -16,7 +16,7 @@ spec:
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-webapp
+  name: fleetman-webapp-vs
   namespace: default
 spec:
   hosts:      # which incoming host are we applying the proxy rules to???
@@ -24,15 +24,16 @@ spec:
   gateways:
     - ingress-gateway-configuration
   http:
-    - match:
-      - headers:  # IF
-          x-my-header:
-            exact: canary
-      route: # THEN
-      - destination:
-          host: fleetman-webapp
-          subset: experimental
-    - route: # CATCH ALL
+  - name: "canary-route"
+    match:
+    - headers:  # IF
+        x-my-header:
+          exact: canary
+    route: # THEN
+    - destination:
+        host: fleetman-webapp
+        subset: experimental
+  - route: # CATCH ALL
       - destination:
           host: fleetman-webapp
           subset: original
@@ -40,7 +41,7 @@ spec:
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-webapp
+  name: fleetman-webapp-dr
   namespace: default
 spec:
   host: fleetman-webapp
