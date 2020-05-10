@@ -1,7 +1,7 @@
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-staff-service
+  name: fleetman-staff-service-vs
   namespace: default
 spec:
   hosts:
@@ -12,10 +12,14 @@ spec:
             x-my-header:
               exact: canary
       fault:
-        abort:
+        # abort:
+        #   percentage:
+        #     value: 50.0
+        #   httpStatus: 418
+        delay:
           percentage:
-            value: 100.0
-          httpStatus: 418 # BE CAREFUL WITH INDENTATION!
+            value: 50.0
+          fixedDelay: 10s # for 50% of requests generates a delay of 10s
       route:
         - destination:
             host: fleetman-staff-service
@@ -28,7 +32,7 @@ spec:
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: fleetman-staff-service
+  name: fleetman-staff-service-dr
   namespace: default
 spec:
   host: fleetman-staff-service
